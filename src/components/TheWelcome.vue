@@ -1,88 +1,106 @@
 <script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+import { ref } from 'vue'
+
+const image = ref(false)
+const stock = ref(false)
+const unsold = ref(false)
+const available = ref(false)
+
+const addColumn = () => {
+  if (!image.value) {
+    image.value = true
+    return
+  }
+  if (!stock.value) {
+    stock.value = true
+    return
+  }
+  if (!unsold.value) {
+    unsold.value = true
+    return
+  }
+  if (!available.value) {
+    available.value = true
+    return
+  }
+}
 </script>
 
 <template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Documentation</template>
-
-    Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
-
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
-
-    <br />
-
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
-
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
-
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
-
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
+  <div class="item">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" width="130px">품목코드</th>
+          <th scope="col" width="170px">품목명</th>
+          <th scope="col" width="110px" v-if="image">이미지</th>
+          <th scope="col" width="130px" v-if="stock">재고수량</th>
+          <th scope="col" width="110px" v-if="unsold">미판매</th>
+          <th scope="col" width="140px" v-if="available">가용 재고</th>
+          <th scope="col" class="plus" @click="addColumn">+</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>멀티 비타민</td>
+          <td v-if="image"><img src="../assets/멀티 비타민.png" width="50px" /></td>
+          <td v-if="stock">85</td>
+          <td v-if="unsold">10</td>
+          <td v-if="available">75</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>레모네이드</td>
+          <td v-if="image"><img src="../assets/레모네이드.jpg" width="50px" /></td>
+          <td v-if="stock">80</td>
+          <td v-if="unsold">3</td>
+          <td v-if="available">77</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>통조림 참치</td>
+          <td v-if="image"><img src="../assets/통조림 참치.jpg" width="50px" /></td>
+          <td v-if="stock">45</td>
+          <td v-if="unsold">5</td>
+          <td v-if="available">40</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>포도 주스</td>
+          <td v-if="image"><img src="../assets/포도 주스.jpg" width="50px" /></td>
+          <td v-if="stock">45</td>
+          <td v-if="unsold">10</td>
+          <td v-if="available">35</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>콜라</td>
+          <td v-if="image"><img src="../assets/콜라.jpg" width="50px" /></td>
+          <td v-if="stock">40</td>
+          <td v-if="unsold">5</td>
+          <td v-if="available">35</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
+
+<style scoped>
+.item {
+  height: 600px;
+  border-left: 1px solid var(--color-border);
+}
+
+.item .table {
+  vertical-align: middle;
+}
+
+.item .table tr {
+  height: 70px;
+}
+
+.item .table .plus {
+  cursor: pointer;
+}
+</style>
